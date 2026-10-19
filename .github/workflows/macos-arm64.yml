@@ -26,7 +26,7 @@ jobs:
       - run: npm run package:mac
       - name: Verify Apple Silicon binary and ad-hoc signature
         run: |
-          lipo -verify_arch arm64 "release/mac-arm64/Mapaseo PDF.app/Contents/MacOS/Mapaseo PDF"
+          lipo "release/mac-arm64/Mapaseo PDF.app/Contents/MacOS/Mapaseo PDF" -verify_arch arm64
           codesign --verify --deep --strict --verbose=2 "release/mac-arm64/Mapaseo PDF.app"
           plutil -lint "release/mac-arm64/Mapaseo PDF.app/Contents/Info.plist"
           hdiutil verify release/*.dmg
