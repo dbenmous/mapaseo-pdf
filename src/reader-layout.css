@@ -1,0 +1,118 @@
+/* Compact desktop chrome: keep the document at the center of the workspace. */
+.app.platform-mac { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; }
+.app.platform-mac .compact-titlebar { padding-left: 100px; }
+.app .compact-titlebar {
+  height: 40px;
+  min-height: 40px;
+  padding-left: 12px;
+  background: var(--surface);
+  gap: 7px;
+}
+.titlebar-brand { padding-right: 10px; flex-shrink: 0; }
+.compact-titlebar .brand { font-size: 15px; gap: 6px; }
+.compact-titlebar .brand-mark, .compact-titlebar .brand-mark svg { width: 23px; height: 23px; }
+.compact-titlebar .brand-pdf { font-size: 10px; }
+.compact-titlebar button, .compact-titlebar .document-tabs { -webkit-app-region: no-drag; }
+.app .compact-titlebar .home-tab { padding: 0; width: 32px; height: 30px; justify-content: center; flex-shrink: 0; }
+.app .compact-titlebar .document-tabs {
+  height: 100%; min-height: 0; padding: 0 3px; border: 0;
+  flex: 0 1 auto; min-width: 0; overflow-x: auto; background: transparent;
+  scrollbar-width: none;
+}
+.compact-titlebar .document-tabs::-webkit-scrollbar { display: none; }
+.app .document-tab { height: 31px; flex-shrink: 0; }
+.titlebar-drag { flex: 1 0 22px; height: 100%; -webkit-app-region: drag; }
+.app .window-actions { margin-left: 0; flex-shrink: 0; }
+.app .window-actions > button { width: 42px; }
+.app .commandbar { height: 46px; min-height: 46px; padding: 0 15px; gap: 12px; }
+.app .workspace-modes { gap: 22px; flex-shrink: 0; }
+.app .workspace-modes > button { font-size: 12px; }
+.app .commandbar-actions { gap: 9px; }
+.command-divider { width: 1px; height: 16px; background: var(--line); margin: 0 3px; }
+.app .save-button { height: 31px; padding: 0 12px; }
+.app .assistant-toggle {
+  display: flex; height: 31px; align-items: center; justify-content: center;
+  font-size: 11px; padding: 0 12px; border: 1px solid var(--line);
+  border-radius: 5px; margin: 0 0 0 4px; gap: 7px; color: var(--accent);
+}
+.app .assistant-toggle.selected { background: var(--accent-soft); border-color: var(--accent-soft); }
+.app .reader-workspace { position: relative; }
+.app .navigation-panel { border-left: 0; }
+.app .page-scroll { padding: 16px 22px 20px 70px; scroll-behavior: auto; }
+.app .page-mount { padding-top: 0; }
+.app .statusbar { height: 24px; min-height: 24px; padding: 0 13px; }
+.app .active-tool-hint { bottom: 14px; max-width: calc(100% - 135px); overflow: hidden; text-overflow: ellipsis; }
+.app .busy-indicator { top: 97px; }
+
+.quick-tools {
+  position: absolute; left: 12px; top: 14px; z-index: 9;
+  display: flex; align-items: center; flex-direction: column; gap: 3px;
+  width: 42px; padding: 5px 4px; border: 1px solid #d1dadd; border-radius: 6px;
+  background: var(--bg); box-shadow: 0 2px 7px #233c4210;
+  max-height: calc(100% - 28px); overflow-y: auto; scrollbar-width: none;
+}
+.quick-tools::-webkit-scrollbar { display: none; }
+.quick-tools .icon-button { height: 32px; width: 32px; min-height: 32px; color: #61747b; }
+.quick-tools .icon-button.active { color: var(--accent); background: var(--accent-soft); }
+.quick-divider { display: block; width: 23px; height: 1px; min-height: 1px; margin: 4px auto; background: var(--line); }
+.annotation-color-control { width: 32px; height: 27px; min-height: 27px; display: grid; place-items: center; }
+.annotation-color-control > span { width: 13px; height: 13px; border: 2px solid var(--bg); outline: 1px solid #d3dfe0; border-radius: 50%; }
+
+.view-rail {
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  width: 48px; min-width: 48px; padding: 10px 5px 6px; gap: 10px;
+  background: var(--bg); border-left: 1px solid var(--line);
+  overflow-y: auto; scrollbar-width: none;
+}
+.view-rail::-webkit-scrollbar { display: none; }
+.rail-actions, .view-controls, .rail-settings { display: flex; flex-direction: column; align-items: center; gap: 3px; flex-shrink: 0; }
+.view-controls { margin-top: auto; }
+.view-rail .icon-button { width: 32px; height: 29px; }
+.view-rail .icon-button svg { width: 17px; height: 17px; }
+.view-rail .zoom-select {
+  width: 40px; padding: 5px 0; font-size: 9px; text-align: center;
+  appearance: none; color: var(--text); border: 1px solid var(--line);
+  border-radius: 4px; background: var(--panel); margin: 2px 0;
+}
+.view-rail .zoom-select option { background: var(--bg); color: var(--text); }
+.rail-page-field { display: flex; flex-direction: column; align-items: center; gap: 7px; margin: 6px 0; }
+.rail-page-field > input {
+  width: 32px; height: 31px; border-radius: 4px; border: 1px solid #d4dfe1;
+  background: var(--bg); text-align: center; color: var(--text); font-size: 11px;
+  appearance: textfield; -moz-appearance: textfield; padding: 0 2px;
+}
+.rail-page-field > input::-webkit-inner-spin-button { display: none; }
+.rail-page-field > span { font-size: 9px; color: #8b9ca3; }
+.page-stepper { display: grid; grid-template-columns: repeat(2, 18px); gap: 2px; }
+.page-stepper .icon-button { width: 18px; height: 24px; }
+.page-stepper .icon-button svg { width: 14px; height: 14px; }
+.rail-settings { border-top: 1px solid var(--line); padding-top: 4px; }
+[data-theme="dark"] .quick-tools { border-color: #354d53; }
+[data-theme="dark"] .quick-tools .icon-button { color: #9db5bb; }
+[data-theme="dark"] .quick-tools .icon-button.active { color: var(--accent); }
+[data-theme="dark"] .rail-page-field > input { border-color: #3e585f; }
+@media (max-width: 1150px) {
+  .app .workspace-modes { gap: 16px; }
+  .app .workspace-modes > button { font-size: 11px; }
+  .app .commandbar-actions { gap: 6px; }
+  .app .assistant-toggle { padding: 0 9px; }
+}
+@media (max-width: 950px) {
+  .app .compact-titlebar { padding-left: 9px; }
+  .titlebar-brand { padding-right: 3px; }
+  .compact-titlebar .brand { font-size: 13px; }
+  .compact-titlebar .brand-pdf { display: none; }
+  .app .commandbar { padding: 0 10px; }
+  .app .workspace-modes { gap: 13px; }
+  .app .workspace-modes > button > svg:first-child { display: none; }
+  .app .assistant-toggle { font-size: 10px; padding: 0 8px; }
+}
+@media (max-height: 760px) {
+  .view-rail { padding-top: 7px; gap: 5px; }
+  .rail-actions, .view-controls, .rail-settings { gap: 1px; }
+  .view-rail .icon-button { height: 26px; }
+  .rail-page-field { gap: 5px; margin: 4px 0; }
+  .rail-page-field > input { height: 28px; }
+  .view-rail .quick-divider { margin: 3px auto; }
+  .page-stepper .icon-button { height: 20px; }
+}

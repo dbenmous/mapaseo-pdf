@@ -1,0 +1,45 @@
+name: Build Mac app (Apple Silicon)
+
+# Deliberately manual: preparing this workflow does not start a paid runner.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 30
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Verify native Apple Silicon runner
+        run: test "$(uname -m)" = arm64
+      - run: npm ci
+      - run: npm test
+      - run: npm run package:mac
+      - name: Verify Apple Silicon binary and ad-hoc signature
+        run: |
+          lipo -verify_arch arm64 "release/mac-arm64/Mapaseo PDF.app/Contents/MacOS/Mapaseo PDF"
+          codesign --verify --deep --strict --verbose=2 "release/mac-arm64/Mapaseo PDF.app"
+          plutil -lint "release/mac-arm64/Mapaseo PDF.app/Contents/Info.plist"
+          hdiutil verify release/*.dmg
+      - run: npm run test:mac
+      - name: Checksums
+        run: shasum -a 256 release/*.dmg release/*.zip > release/SHA256SUMS-mac.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Mapaseo-PDF-Mac-Apple-Silicon
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            release/*.dmg
+            release/*.zip
+            release/SHA256SUMS-mac.txt
+            docs/MAC.md
